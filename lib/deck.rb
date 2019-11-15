@@ -1,11 +1,13 @@
-
+require 'forwardable'
 require_relative 'spanish_set'
 
 class Deck
   attr_reader :cards
-  # responsibilities of the deck
-  # composing itself with cards
-  # shuffling itself
+  attr_accessor :set
+
+  extend Forwardable
+
+  def_delegators :set, :suites, :ranks, :new_card
 
   def initialize(set)
     @cards = []
@@ -13,9 +15,9 @@ class Deck
   end
 
   def build
-    @set.suites.each do |suite|
-      @set.ranks.each do |rank|
-        @cards << @set.new_card(suite, rank)
+    suites.each do |suite|
+      ranks.each do |rank|
+        @cards << new_card(suite, rank)
       end
     end
   end
@@ -40,3 +42,5 @@ deck.inspect
 deck.shuffle
 puts "##"
 deck.inspect
+p deck.cards.count
+
