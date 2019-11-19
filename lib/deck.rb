@@ -1,5 +1,5 @@
 require 'forwardable'
-require_relative 'spanish_set'
+
 
 class Deck
   attr_reader :cards
@@ -22,7 +22,6 @@ class Deck
     end
   end
 
-
   def shuffle
     @cards.shuffle!
   end
@@ -33,14 +32,4 @@ class Deck
 
 end
 
-
-deck = Deck.new(SpanishSet.new)
-
-
-deck.build
-deck.inspect
-deck.shuffle
-puts "##"
-deck.inspect
-p deck.cards.count
 
