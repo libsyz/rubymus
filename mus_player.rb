@@ -1,7 +1,7 @@
 
 
 class MusPlayer
-  attr_accessor :hand
+  attr_accessor :hand, :position
 
   def initialize(hand, position)
     @hand = hand

@@ -2,6 +2,10 @@ require_relative 'lib/spanish_set'
 require_relative 'lib/deck'
 require_relative 'mus_player'
 require_relative 'hand'
+require 'csv'
+
+# load a file to dump data into
+mus_data_path = "mus_data.csv"
 
 
 # load a spanish set of cards
@@ -22,19 +26,30 @@ players = []
 end
 
 # give 4 cards to each player, one card at a time
+# you hand out the cards
 4.times do
   players.each do |player|
     player.hand.take_card
   end
 end
 
+def game_value(cards)
+  sum = 0
+  cards.each do |card|
+    sum += card.game_value
+  end
+  sum
+end
 
-# What kind of output would you like to get out of this
-# Run the game
-# running the game means that
-# you build the deck
-# you shuffle it
-# you hand out the cards
+def store_hand_values(players)
+  CSV.open('mus_data.csv', 'ab') do |csv|
+      players.each do |player|
+        csv << [player.hand.cards, player.position, game_value(player.hand.cards)]
+    end
+  end
+end
+
+store_hand_values(players)
 # You store the hands' values for all games
 # you calculate and store the results of
 # Big
