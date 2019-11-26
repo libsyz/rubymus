@@ -15,4 +15,18 @@ class MusHand
     cards << deck.cards.pop
   end
 
+  def value
+    @cards.sum { |card| card.big_value }
+  end
+
+  def game_value
+    @cards.sum { |card| card.game_value }
+  end
+
+  def pair?
+  end
+
+  def pair_value
+  end
+
 end
